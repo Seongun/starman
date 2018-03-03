@@ -19,9 +19,11 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4394592685502622}
-  m_Layer: 0
+  - component: {fileID: 64200595721143304}
+  - component: {fileID: 114144189076008630}
+  m_Layer: 8
   m_Name: CarRadio
-  m_TagString: Untagged
+  m_TagString: RadioObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -37,7 +39,7 @@ GameObject:
   - component: {fileID: 33901455358932714}
   - component: {fileID: 65075858685389302}
   - component: {fileID: 23287341752689658}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RadioBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +57,7 @@ GameObject:
   - component: {fileID: 33890809213409836}
   - component: {fileID: 136708432420192780}
   - component: {fileID: 23555743988261756}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: VolumesKnob
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,7 +75,7 @@ GameObject:
   - component: {fileID: 33602009067765154}
   - component: {fileID: 65702925585398470}
   - component: {fileID: 23530815008315530}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ChannelsBoard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,7 +93,7 @@ GameObject:
   - component: {fileID: 33659821451423520}
   - component: {fileID: 136968736368888318}
   - component: {fileID: 23543177761066282}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ChannelsKnob
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,7 +120,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1298916350089722}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.056, y: 0.594, z: -0.744}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4704305305524926}
@@ -331,6 +333,20 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1344681665401734}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!64 &64200595721143304
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1298916350089722}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 0}
 --- !u!65 &65075858685389302
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -355,6 +371,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114144189076008630
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1298916350089722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4787a56a96a0db74c997df243d3a06cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numChannels: 5
+  channelValue: 0
+  basicVolume: 0
 --- !u!136 &136708432420192780
 CapsuleCollider:
   m_ObjectHideFlags: 1
