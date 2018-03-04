@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class audioScripts : MonoBehaviour {
 
-	public int numChannels = 5;
+	public int numChannels = 1;
 
 	public float channelValue = 0.0f;
 	public float basicVolume = 0.0f;
@@ -15,31 +15,35 @@ public class audioScripts : MonoBehaviour {
 	public AudioClip stereoSound;
 	public Object[] songs;
 	int numSongs;
-	private bool[] songHasPlayed;
-	private AudioSource[] musicChannels;
-	private AudioSource stereoChannel;
+	int numPickedSongs = 0;
+	bool[] songHasPlayed;
+	AudioSource[] musicChannels;
+	AudioSource stereoChannel;
 
 	// Use this for initialization
 	void Start () {
 
-	
 
-		
 	}
 
 	void Awake(){
-	
-		//load audio clips of mp3 files from "Music" folder
-		songs = Resources.LoadAll ("Music", typeof(AudioClip));
-		numSongs = songs.Length;
+		Debug.Log ("awake");
 
-	
+
+		//load audio clips of mp3 files from "Music" folder
+		songs = Resources.LoadAll ("", typeof(AudioClip));
+		numSongs = songs.Length;
+		Debug.Log ("this happened");
+		Debug.Log (songs.Length);
+
+		songHasPlayed = new bool[numSongs];
+
 		//initialize an array that indicates whether a certain song has been played yet
 		songHasPlayed = new bool[numSongs];
 		for (int i = 0; i < numSongs; i++) {
 			songHasPlayed [i] = false;
 		}
-			
+
 		//generate music channels( that are of audio source types)
 		musicChannels = new AudioSource[numChannels];
 
@@ -47,25 +51,25 @@ public class audioScripts : MonoBehaviour {
 		for (int i = 0; i < numChannels; i++) {
 			AudioSource channel = gameObject.AddComponent<AudioSource>();
 			//set the initial song this channel will be playing
-			channel.clip = songs[pickOneRandomSong()] as AudioClip;
-			channel.playOnAwake = true;
+		//	channel.clip = songs[pickOneRandomSong()] as AudioClip;
+			channel.playOnAwake = false;
 			channel.loop = false;
 			channel.volume = i==0 ? 1.0f : 0.0f;
 			musicChannels [i] = channel;
-
 		}
 
 		//initialize stereo sound
-
 		stereoChannel = gameObject.AddComponent<AudioSource>();
 		stereoChannel.clip = stereoSound;
-		stereoChannel.playOnAwake = true;
+		stereoChannel.playOnAwake = false;
 		stereoChannel.loop = true;
 		stereoChannel.volume = 0.0f;
 
 
 	}
-	
+
+	/*
+
 	// Update is called once per frame
 	void Update () {
 
@@ -74,37 +78,43 @@ public class audioScripts : MonoBehaviour {
 
 	}
 
-
 	//if the station's music has stopped, play the next song
 	void playNextSong(){
-
-		for (int i = 0; i < numChannels; i++) {
 		
-			if (!musicChannels [i].isPlaying) {
+		for (int i = 0; i < numChannels; i++) {
 			
+			if (! musicChannels[i].isPlaying ) {
 				playRandomNewSong (i);
 			}
-
 		}
-	
+
 	}
 
 	void playRandomNewSong(int channelNumber){
-
+		
 		musicChannels[channelNumber].clip = songs[pickOneRandomSong()] as AudioClip;
 		musicChannels [channelNumber].Play ();
 	
 	}
 
 	int pickOneRandomSong(){
-	
-		while ( true ) {
-			int randInt = Random.Range (0, songs.Length);
 
+		if (numPickedSongs == songs.Length) {
+			for (int i = 0; i < songs.Length; i++) {
+				songHasPlayed [i] = false;
+			}
+		}
+
+
+		while ( true ) {
+			
+			int randInt = Random.Range (0, songs.Length);
+	
 			if (!songHasPlayed [randInt]) {
 				songHasPlayed [randInt] = true;
 				return randInt;
 			}
+		
 		}
 	
 	}
@@ -133,7 +143,7 @@ public class audioScripts : MonoBehaviour {
 			} else {
 				//this code may be redundant, but i'm not too sure how linear the transformation between channels will be.
 			
-					changeChannelVolume (i, 0);
+				changeChannelVolume (i, 0);
 
 			}
 
@@ -154,13 +164,11 @@ public class audioScripts : MonoBehaviour {
 
 	void changeChannelVolume(int i, float volume){
 		musicChannels [i].volume = volume;
-//		Debug.Log ("channel # " + i + " volume is: "+volume);
 
 	}
 
 	void changeStereoVolume(float volume){
 		stereoChannel.volume = volume;	
-//		Debug.Log ("stereo sound volume: "+ volume);
 	}
-
+	*/
 }
