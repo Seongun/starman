@@ -22,8 +22,14 @@ public class audioScripts : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		Debug.Log ("Start");
 
+		for (int i = 0; i < numChannels; i++) {
+			musicChannels [i].Play ();
 
+		}
+
+		stereoChannel.Play ();
 	}
 
 	void Awake(){
@@ -33,10 +39,7 @@ public class audioScripts : MonoBehaviour {
 		//load audio clips of mp3 files from "Music" folder
 		songs = Resources.LoadAll ("", typeof(AudioClip));
 		numSongs = songs.Length;
-		Debug.Log ("this happened");
-		Debug.Log (songs.Length);
 
-		songHasPlayed = new bool[numSongs];
 
 		//initialize an array that indicates whether a certain song has been played yet
 		songHasPlayed = new bool[numSongs];
@@ -51,7 +54,7 @@ public class audioScripts : MonoBehaviour {
 		for (int i = 0; i < numChannels; i++) {
 			AudioSource channel = gameObject.AddComponent<AudioSource>();
 			//set the initial song this channel will be playing
-		//	channel.clip = songs[pickOneRandomSong()] as AudioClip;
+			channel.clip = songs[pickOneRandomSong()] as AudioClip;
 			channel.playOnAwake = false;
 			channel.loop = false;
 			channel.volume = i==0 ? 1.0f : 0.0f;
@@ -67,8 +70,7 @@ public class audioScripts : MonoBehaviour {
 
 
 	}
-
-	/*
+		
 
 	// Update is called once per frame
 	void Update () {
@@ -99,29 +101,51 @@ public class audioScripts : MonoBehaviour {
 
 	int pickOneRandomSong(){
 
-		if (numPickedSongs == songs.Length) {
+		if (numPickedSongs >= songs.Length-1) {
 			for (int i = 0; i < songs.Length; i++) {
 				songHasPlayed [i] = false;
 			}
+			numPickedSongs = 0;
 		}
+		if (numPickedSongs < songs.Length / 2) {
+
+			while (true) {
+
+				int randInt = Random.Range (0, songs.Length);
+
+				if (!songHasPlayed [randInt]) {
+					songHasPlayed [randInt] = true;
+					numPickedSongs += 1;
+					return randInt;
+				}
+
+			}
+		
+		} else {
+
+			for (int i = 0; i < songs.Length; i++) {
 
 
-		while ( true ) {
-			
-			int randInt = Random.Range (0, songs.Length);
-	
-			if (!songHasPlayed [randInt]) {
-				songHasPlayed [randInt] = true;
-				return randInt;
+				if (!songHasPlayed [i]) {
+					
+					songHasPlayed [i] = true;
+					numPickedSongs += 1;
+					return i;
+				
+				} 
 			}
 		
 		}
+
+
+	
+
 	
 	}
 
 
 	void adjustRadioChannel(){
-
+		Debug.Log (channelValue);
 	
 		//loop through channels to set volume for each channel
 		for (int i = 0; i < numChannels; i++) {
@@ -147,8 +171,6 @@ public class audioScripts : MonoBehaviour {
 
 			}
 
-
-
 		}
 
 		//change the volume of the stereo background sound. It's based on sign function.
@@ -157,7 +179,6 @@ public class audioScripts : MonoBehaviour {
 		float stereoVolume = Mathf.Lerp ( 0.0f, MAXSTEREOVOLUME , stereoVolumeRaw / 2.0f);
 
 		changeStereoVolume (stereoVolume);
-
 
 	}
 
@@ -170,5 +191,5 @@ public class audioScripts : MonoBehaviour {
 	void changeStereoVolume(float volume){
 		stereoChannel.volume = volume;	
 	}
-	*/
+
 }
