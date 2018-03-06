@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 96827910534190a4fb69542785e01ca2
+timeCreated: 1487952452
+licenseType: Free
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - Radio: {fileID: 1298916350089722, guid: 62c38622f902c4bf096f61ac6102627c, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
