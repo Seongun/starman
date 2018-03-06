@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class audioScripts : MonoBehaviour {
 
-	public int numChannels = 1;
+	public int numChannels;
 
 	public float channelValue = 0.0f;
 	public float basicVolume = 0.0f;
@@ -22,6 +22,7 @@ public class audioScripts : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		
 		Debug.Log ("Start");
 
 		for (int i = 0; i < numChannels; i++) {
@@ -107,6 +108,8 @@ public class audioScripts : MonoBehaviour {
 			}
 			numPickedSongs = 0;
 		}
+
+
 		if (numPickedSongs < songs.Length / 2) {
 
 			while (true) {
@@ -137,10 +140,8 @@ public class audioScripts : MonoBehaviour {
 		
 		}
 
-
-	
-
-	
+		return 0;
+			
 	}
 
 

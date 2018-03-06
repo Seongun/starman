@@ -19,6 +19,14 @@ public class InputManager : MonoBehaviour {
 	public float currentStationAngle = 0.0f;
 	float newChannelAngle = 0.0f;
 	public GameObject Radio;
+	public int numChannels;
+
+
+	void Start(){
+
+		numChannels= Radio.GetComponent<audioScripts> ().numChannels;
+
+	}
 
 	void Awake()
 	{
@@ -96,7 +104,7 @@ public class InputManager : MonoBehaviour {
 	void adjustRadioChannel(float displacementValue){
 
 
-		newChannelAngle = (currentStationAngle + displacementValue * 0.5f) % 180.0f ;
+		newChannelAngle = (currentStationAngle + displacementValue * 0.5f / numChannels) % 180.0f ;
 		//currentStationAngle = newChannelAngle;
 
 		//update the value of playSong prefab by some value.
