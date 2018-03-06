@@ -11,6 +11,8 @@ public class audioScripts : MonoBehaviour {
 	const float MAXVOLUME = 1.0f;
 	const float MAXSTEREOVOLUME = 1.0f;
 
+	public bool isChangingSong = false;
+	public string currentSong;
 
 	public AudioClip stereoSound;
 	public Object[] songs;
@@ -38,7 +40,7 @@ public class audioScripts : MonoBehaviour {
 
 
 		//load audio clips of mp3 files from "Music" folder
-		songs = Resources.LoadAll ("", typeof(AudioClip));
+		songs = Resources.LoadAll ("Songs", typeof(AudioClip));
 		numSongs = songs.Length;
 
 
@@ -56,6 +58,10 @@ public class audioScripts : MonoBehaviour {
 			AudioSource channel = gameObject.AddComponent<AudioSource>();
 			//set the initial song this channel will be playing
 			channel.clip = songs[pickOneRandomSong()] as AudioClip;
+			if (i == 0) {
+				currentSong = channel.clip.name;
+			}
+
 			channel.playOnAwake = false;
 			channel.loop = false;
 			channel.volume = i==0 ? 1.0f : 0.0f;
@@ -68,7 +74,6 @@ public class audioScripts : MonoBehaviour {
 		stereoChannel.playOnAwake = false;
 		stereoChannel.loop = true;
 		stereoChannel.volume = 0.0f;
-
 
 	}
 		
@@ -146,7 +151,7 @@ public class audioScripts : MonoBehaviour {
 
 
 	void adjustRadioChannel(){
-		Debug.Log (channelValue);
+
 	
 		//loop through channels to set volume for each channel
 		for (int i = 0; i < numChannels; i++) {
@@ -161,6 +166,14 @@ public class audioScripts : MonoBehaviour {
 			
 				float changedVolumeRaw = (90.0f / (float)numChannels) - channelChecker;
 				float changedVolume = Mathf.Lerp ( 0.0f, MAXVOLUME, 1.0f - ((channelChecker) * (float)numChannels) / 90.0f);
+
+				currentSong = musicChannels [i].clip.name;
+				if (changedVolume < 0.4f) {
+					isChangingSong = true;
+				} else {
+					
+					isChangingSong = false;
+				}
 
 				changeChannelVolume (i, changedVolume + basicVolume);
 				
