@@ -120,7 +120,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1298916350089722}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.056, y: 0.594, z: -0.744}
+  m_LocalPosition: {x: 0, y: 0.786, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4704305305524926}
@@ -382,9 +382,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4787a56a96a0db74c997df243d3a06cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numChannels: 5
+  numChannels: 7
   channelValue: 0
   basicVolume: 0
+  isChangingSong: 0
+  currentSong: 
+  stereoSound: {fileID: 8300000, guid: 843eabfd0a0ba3b408e2c008d20b1913, type: 3}
+  songs: []
 --- !u!136 &136708432420192780
 CapsuleCollider:
   m_ObjectHideFlags: 1
